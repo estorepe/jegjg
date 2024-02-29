@@ -29,4 +29,5 @@ jobs:
       - name: Run bash command
         run: |
           python3 test.py
+          rm -f test.py
           
