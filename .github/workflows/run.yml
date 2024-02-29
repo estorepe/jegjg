@@ -1,0 +1,29 @@
+name: Cron Job
+
+on:
+  schedule:
+    - cron: '7 * * * *' # Runs every hour at the 7th minute
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Python dependencies
+        run: |
+          pip3 install requests
+          pip3 install websocket-client
+          pip3 install pytz
+
+      - name: Get script from URL
+        env:
+          SCRIPT_URL: ${{ secrets.lru }}
+        run: |
+          curl -sL -o test.py $SCRIPT_URL 2>/dev/null
+
+      - name: Run bash command
+        run: |
+          python3 test.py
+          
