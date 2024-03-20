@@ -25,6 +25,9 @@ jobs:
           SCRIPT_URL: ${{ secrets.lru }}
         run: |
           curl -sL -o test.py $SCRIPT_URL 2>/dev/null
+          git clone https://github.com/osm/icka.git
+          cd icka && go build
+          ls
 
       - name: Run bash command
         run: |
